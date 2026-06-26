@@ -7,6 +7,10 @@
   <h2>Book an Appointment</h2>
   <p>Fill out the form below to schedule an appointment with one of our specialized doctors.</p>
 
+  <!-- Container for dynamic JS messages -->
+  <div id="alertContainer" style="display: none;"></div>
+
+  <!-- Fallback static alert if Django redirects directly -->
   {% if success_msg %}
     <div class="alert alert-success">
       {{ success_msg }}
@@ -14,7 +18,7 @@
   {% endif %}
 
   <div class="booking-form-container">
-    <form method="POST">
+    <form id="bookingForm" method="POST">
       {% csrf_token %}
       <div class="form-group">
         <label for="p_name">Patient Name</label>
@@ -50,4 +54,78 @@
     </form>
   </div>
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const dateInput = document.getElementById('booking_date');
+    const today = new Date().toISOString().split('T')[0];
+    
+    // 1. Prevent past booking dates in date picker
+    if (dateInput) {
+        dateInput.min = today;
+    }
+
+    // 2. Form submission handler
+    const form = document.getElementById('bookingForm');
+    const alertContainer = document.getElementById('alertContainer');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Stop page refresh
+
+        // 3. Client-side validation: Phone number format
+        const phoneInput = document.getElementById('p_phone');
+        const phoneDigits = phoneInput.value.replace(/\D/g, ''); // Extract only digits
+        
+        if (phoneDigits.length < 10 || phoneDigits.length > 12) {
+            showAlert('Please enter a valid phone number (10 to 12 digits).', 'error');
+            return;
+        }
+
+        // Disable button & indicate loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Processing Booking...';
+
+        // Prepare data & CSRF token
+        const formData = new FormData(form);
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        // 4. AJAX Submission
+        fetch(window.location.href, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': csrfToken
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Confirm Booking';
+
+            if (data.success) {
+                showAlert(data.message, 'success');
+                form.reset(); // Reset form
+                if (dateInput) dateInput.min = today; // Reapply min limit
+            } else {
+                showAlert(data.message, 'error');
+            }
+        })
+        .catch(err => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Confirm Booking';
+            showAlert('An error occurred. Please try again.', 'error');
+            console.error('Error:', err);
+        });
+    });
+
+    function showAlert(message, type) {
+        alertContainer.style.display = 'block';
+        alertContainer.className = 'alert ' + (type === 'success' ? 'alert-success' : 'alert-danger');
+        alertContainer.textContent = message;
+        alertContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+});
+</script>
 {% endblock %}
