@@ -662,3 +662,16 @@ body.dark-mode .hero-section h2 {
 body.dark-mode .hero-section p {
 	color: #e2e8f0;
 }
+
+/* Error Alert Styles */
+.alert-danger {
+	background-color: #fee2e2;
+	color: #991b1b;
+	border: 1px solid #fecaca;
+}
+
+body.dark-mode .alert-danger {
+	background-color: #7f1d1d;
+	color: #fca5a5;
+	border-color: #991b1b;
+}
