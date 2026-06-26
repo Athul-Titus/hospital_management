@@ -517,3 +517,148 @@ p {
 	color: #64748b;
 	margin-bottom: 16px;
 }
+
+/* Dark Mode Overrides */
+body.dark-mode {
+	background: #0f172a;
+	color: #e2e8f0;
+}
+
+body.dark-mode header,
+body.dark-mode footer,
+body.dark-mode main {
+	background: #1e293b;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+body.dark-mode .brand-logo,
+body.dark-mode .footer-image {
+	border-color: #334155;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+	color: #38bdf8;
+}
+
+body.dark-mode .site-nav a,
+body.dark-mode .footer-links a {
+	color: #38bdf8;
+}
+
+body.dark-mode p {
+	color: #cbd5e1;
+}
+
+body.dark-mode .department-card,
+body.dark-mode .doctor-card,
+body.dark-mode .service-card,
+body.dark-mode .booking-form-container {
+	background: #1e293b;
+	border-color: #334155;
+	color: #e2e8f0;
+}
+
+body.dark-mode .department-card h3,
+body.dark-mode .doctor-card h3,
+body.dark-mode .service-card h3 {
+	color: #38bdf8;
+}
+
+body.dark-mode .department-card p,
+body.dark-mode .doctor-card p,
+body.dark-mode .service-card p {
+	color: #cbd5e1;
+}
+
+body.dark-mode .doctor-spec {
+	color: #34d399 !important;
+}
+
+body.dark-mode .doctor-department {
+	color: #94a3b8 !important;
+}
+
+body.dark-mode .form-group label {
+	color: #e2e8f0;
+}
+
+body.dark-mode .form-control {
+	background: #0f172a;
+	border-color: #334155;
+	color: #f8fafc;
+}
+
+body.dark-mode .form-control:focus {
+	border-color: #38bdf8;
+	box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+body.dark-mode .btn-submit,
+body.dark-mode .btn-primary {
+	background: #38bdf8;
+	color: #0f172a;
+}
+
+body.dark-mode .btn-submit:hover,
+body.dark-mode .btn-primary:hover {
+	background: #0ea5e9;
+}
+
+body.dark-mode .btn-secondary {
+	background: #1e293b;
+	color: #38bdf8 !important;
+	border-color: #334155;
+}
+
+body.dark-mode .btn-secondary:hover {
+	background: #334155;
+}
+
+body.dark-mode .eyebrow {
+	color: #94a3b8;
+}
+
+body.dark-mode .bookings-table th {
+	background-color: #0f172a;
+	color: #94a3b8;
+	border-bottom-color: #334155;
+}
+
+body.dark-mode .bookings-table td {
+	border-bottom-color: #334155;
+	color: #e2e8f0;
+}
+
+body.dark-mode .bookings-table tbody tr:hover {
+	background-color: #0f172a;
+}
+
+body.dark-mode .dept-badge {
+	background-color: #0c4a6e;
+	color: #38bdf8;
+}
+
+body.dark-mode .empty-state {
+	background-color: #1e293b;
+	border-color: #334155;
+}
+
+body.dark-mode .alert-success {
+	background-color: #065f46;
+	color: #a7f3d0;
+	border-color: #047857;
+}
+
+body.dark-mode .hero-section {
+	background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
+}
+
+body.dark-mode .hero-section h2 {
+	color: #38bdf8;
+}
+
+body.dark-mode .hero-section p {
+	color: #e2e8f0;
+}

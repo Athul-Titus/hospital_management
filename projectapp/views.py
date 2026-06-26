@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import departments, doctors, booking
 
 def index(request):
@@ -37,6 +37,9 @@ def booking_view(request):
         email = request.POST.get('p_email')
         doc_id = request.POST.get('doc_name')
         date = request.POST.get('booking_date')
+        
+        is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        
         if name and phone and email and doc_id and date:
             try:
                 doc = doctors.objects.get(id=doc_id)
@@ -47,9 +50,17 @@ def booking_view(request):
                     doc_name=doc,
                     booking_date=date
                 )
-                success_msg = f"Thank you, {name}! Your appointment has been booked successfully."
+                msg = f"Thank you, {name}! Your appointment has been booked successfully."
+                if is_ajax:
+                    return JsonResponse({"success": True, "message": msg})
+                success_msg = msg
             except (doctors.DoesNotExist, ValueError):
-                pass
+                if is_ajax:
+                    return JsonResponse({"success": False, "message": "Selected doctor does not exist."})
+        else:
+            if is_ajax:
+                return JsonResponse({"success": False, "message": "All fields are required."})
+                
     all_doctors = doctors.objects.all()
     return render(request, "booking.html", {"doctors": all_doctors, "success_msg": success_msg})
 
