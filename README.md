@@ -1,6 +1,6 @@
 # Keltron Medical Center - Hospital Management System
 
-A web-based **Hospital Management System (HMS)** built with Python, Django, HTML, and CSS. This project was developed as part of my internship at **Keltron, Trivandrum (Thiruvananthapuram)**.
+A web-based **Hospital Management System (HMS)** built with Python, Django, HTML, and CSS. This project was developed as part of my internship at **Keltron, Trivandrum**.
 
 ---
 
