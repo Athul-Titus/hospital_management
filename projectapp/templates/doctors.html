@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Doctors - Keltron Web{% endblock %}
+
+{% block content %}
+<section class="doctors-section">
+  <h2>Doctors</h2>
+
+  {% if doctors %}
+    <div class="doctors-list">
+      {% for doc in doctors %}
+        <div class="doctor-card">
+          {% if doc.doc_image %}
+            <img class="doctor-image" src="{{ doc.doc_image.url }}" alt="{{ doc.doc_name }}" />
+          {% endif %}
+          <h3>{{ doc.doc_name }}</h3>
+          <p class="doctor-spec">{{ doc.doc_spec }}</p>
+          <p class="doctor-department">Department: {{ doc.dep_name.dept_name }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No doctors available.</p>
+  {% endif %}
+
+  <div class="form-section">
+    <h3>Add New Doctor</h3>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="doc_name">Doctor Name</label>
+        <input type="text" id="doc_name" name="doc_name" class="form-control" placeholder="e.g. Dr. John Doe" required>
+      </div>
+      <div class="form-group">
+        <label for="doc_spec">Specialization</label>
+        <input type="text" id="doc_spec" name="doc_spec" class="form-control" placeholder="e.g. Cardiologist" required>
+      </div>
+      <div class="form-group">
+        <label for="dep_name">Department</label>
+        <select id="dep_name" name="dep_name" class="form-control" required>
+          <option value="">-- Select Department --</option>
+          {% for dept in departments %}
+            <option value="{{ dept.id }}">{{ dept.dept_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="doc_image">Doctor Image</label>
+        <input type="file" id="doc_image" name="doc_image" class="form-control" accept="image/*" required>
+      </div>
+      <button type="submit" class="btn-submit">Add Doctor</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
+

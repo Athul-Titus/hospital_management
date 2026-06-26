@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Demo Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <img
+          src="{% static 'images/image.png' %}"
+          alt="Site logo"
+          class="brand-logo"
+        />
+        <div>
+          <p class="eyebrow">Keltron Web</p>
+          <h1>Shared Layout</h1>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/app/home">Home</a>
+        <a href="/app/about">About</a>
+        <a href="/app/details">Details</a>
+        <a href="/app/departments">Departments</a>
+        <a href="/app/doctors">Doctors</a>
+        <a href="/app/booking">Book Appointment</a>
+        <a href="/app/bookings">Appointments</a>
+      </nav>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <footer class="site-footer">
+      <img
+        src="{% static 'images/image.png' %}"
+        alt="Footer image"
+        class="footer-image"
+      />
+      <p>Simple shared footer for all pages.</p>
+      <div class="footer-links">
+        <a href="/app/home">Home</a>
+        <a href="/app/about">About</a>
+        <a href="/app/details">Details</a>
+        <a href="/app/departments">Departments</a>
+        <a href="/app/doctors">Doctors</a>
+        <a href="/app/booking">Book Appointment</a>
+        <a href="/app/bookings">Appointments</a>
+      </div>
+    </footer>
+  </body>
+</html>

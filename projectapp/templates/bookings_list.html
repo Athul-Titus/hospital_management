@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Appointments - Keltron Hospital{% endblock %}
+
+{% block content %}
+<section class="bookings-list-section">
+  <h2>Appointments Dashboard</h2>
+  <p>Overview of all active patient bookings at Keltron Hospital.</p>
+
+  {% if bookings %}
+    <div class="table-container">
+      <table class="bookings-table">
+        <thead>
+          <tr>
+            <th>Patient Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Doctor</th>
+            <th>Department</th>
+            <th>Appointment Date</th>
+            <th>Booked On</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for b in bookings %}
+            <tr>
+              <td><strong>{{ b.p_name }}</strong></td>
+              <td>{{ b.p_phone }}</td>
+              <td>{{ b.p_email }}</td>
+              <td>{{ b.doc_name.doc_name }}</td>
+              <td><span class="dept-badge">{{ b.doc_name.dep_name.dept_name }}</span></td>
+              <td>{{ b.booking_date|date:"F d, Y" }}</td>
+              <td class="text-muted">{{ b.booked_on|date:"F d, Y" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <p>No appointments booked yet.</p>
+      <a href="/app/booking" class="btn-primary">Book First Appointment</a>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

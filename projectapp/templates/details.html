@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Services - Keltron Hospital{% endblock %}
+
+{% block content %}
+<section class="services-section">
+  <h2>Our Specialized Services</h2>
+  <p class="section-intro">Keltron Hospital offers a wide range of primary and specialty healthcare services. Our state-of-the-art facilities ensure you receive the best care possible.</p>
+
+  <div class="services-grid">
+    {% for service in services %}
+    <div class="service-card">
+      <div class="service-icon">{{ service.icon }}</div>
+      <h3>{{ service.title }}</h3>
+      <p>{{ service.desc }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

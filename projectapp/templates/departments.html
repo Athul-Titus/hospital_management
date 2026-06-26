@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %}Departments - Keltron Web{% endblock%} 
+{% block content %}
+<section class="departments-section">
+  <h2>Departments</h2>
+
+  {% if departments %}
+  <div class="departments-list">
+    {% for dept in departments %}
+    <div class="department-card">
+      <h3>{{ dept.dept_name }}</h3>
+      <p>{{ dept.dep_description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>No departments available.</p>
+  {% endif %}
+
+  <div class="form-section">
+    <h3>Add New Department</h3>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="dept_name">Department Name</label>
+        <input type="text" id="dept_name" name="dept_name" class="form-control" placeholder="e.g. Cardiology" required>
+      </div>
+      <div class="form-group">
+        <label for="dep_description">Description</label>
+        <textarea id="dep_description" name="dep_description" class="form-control" rows="3" placeholder="Describe the department..." required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Add Department</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

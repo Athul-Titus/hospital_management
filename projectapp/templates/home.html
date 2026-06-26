@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Keltron Hospital - Home{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+  <h2>Your Health, Our Priority</h2>
+  <p>Providing exceptional healthcare services with state-of-the-art facilities and compassionate professionals. We are committed to your well-being 24/7.</p>
+  <div class="hero-actions">
+    <a href="/app/departments" class="btn-primary">Our Departments</a>
+    <a href="/app/doctors" class="btn-secondary">Meet Our Doctors</a>
+  </div>
+</section>
+
+<section class="features-section">
+  <h3>Why Choose Keltron Hospital?</h3>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🚑</div>
+      <h4>Emergency Care</h4>
+      <p>Round-the-clock emergency medical response and critical care services.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🩺</div>
+      <h4>Expert Doctors</h4>
+      <p>A team of highly qualified specialists dedicated to your recovery.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔬</div>
+      <h4>Advanced Labs</h4>
+      <p>Modern diagnostic labs and imaging services for accurate results.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

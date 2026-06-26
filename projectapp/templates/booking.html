@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Appointment - Keltron Hospital{% endblock %}
+
+{% block content %}
+<section class="booking-section">
+  <h2>Book an Appointment</h2>
+  <p>Fill out the form below to schedule an appointment with one of our specialized doctors.</p>
+
+  {% if success_msg %}
+    <div class="alert alert-success">
+      {{ success_msg }}
+    </div>
+  {% endif %}
+
+  <div class="booking-form-container">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="p_name">Patient Name</label>
+        <input type="text" id="p_name" name="p_name" class="form-control" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="p_phone">Phone Number</label>
+        <input type="tel" id="p_phone" name="p_phone" class="form-control" placeholder="Enter phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="p_email">Email Address</label>
+        <input type="email" id="p_email" name="p_email" class="form-control" placeholder="Enter email address" required>
+      </div>
+
+      <div class="form-group">
+        <label for="doc_name">Select Doctor</label>
+        <select id="doc_name" name="doc_name" class="form-control" required>
+          <option value="">-- Select Doctor --</option>
+          {% for doc in doctors %}
+            <option value="{{ doc.id }}">{{ doc.doc_name }} ({{ doc.doc_spec }} - {{ doc.dep_name.dept_name }})</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="booking_date">Appointment Date</label>
+        <input type="date" id="booking_date" name="booking_date" class="form-control" required>
+      </div>
+
+      <button type="submit" class="btn-submit" style="width: 100%; margin-top: 8px;">Confirm Booking</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
